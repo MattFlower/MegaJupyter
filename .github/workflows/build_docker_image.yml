@@ -28,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: mattflower/mega_jupyter:latest
+          tags: ghcr.io/mattflower/mega_jupyter:latest
