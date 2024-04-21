@@ -70,6 +70,9 @@ RUN grep Topfind.log ~/.ocamlinit || echo 'Topfind.log:=ignore;;' >> ~/.ocamlini
 RUN /root/.opam/default/bin/ocaml-jupyter-opam-genspec
 RUN jupyter kernelspec install --user --name "ocaml-jupyter-$(opam var switch)" "$(opam var share)/jupyter"
 
+# Kotlin Support
+RUN pip install kotlin-jupyter-kernel
+
 # Language Servers
 RUN apt install -y nodejs npm
 RUN pip install jupyterlab-lsp
