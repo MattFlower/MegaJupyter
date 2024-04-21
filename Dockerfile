@@ -11,13 +11,10 @@ RUN apt install -y build-essential libffi-dev libssl-dev zlib1g-dev liblzma-dev 
 
 # install python
 ENV HOME="/root"
-ENV PYENV_ROOT="$HOME/.pyenv"
-ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
-RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
-RUN echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-RUN eval "$(pyenv init -)"
-RUN pyenv install 3.12
-RUN pyenv global 3.12
+RUN apt install -y python3-full python3-pip
+RUN /usr/bin/python3 -m venv /root/env
+ENV VIRTUAL_ENV="/root/env"
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 
 # jupyterlab, evcxr
 RUN pip install jupyterlab
@@ -40,17 +37,17 @@ ENV PATH="/root/go/bin:${PATH}"
 RUN /root/go/bin/gonb --install
 
 # Java (Ganymede)
-# RUN mkdir /jars
-# RUN apt install -y openjdk-17-jdk
-# RUN /usr/bin/wget https://github.com/allen-ball/ganymede/releases/download/v2.1.2.20230910/ganymede-2.1.2.20230910.jar -O /jars/ganymede.jar
-# RUN /usr/bin/java -jar /jars/ganymede.jar --install --copy-jar=true --user
+RUN mkdir /tmp/ganymede
+RUN apt install -y openjdk-17-jdk
+RUN /usr/bin/wget https://github.com/allen-ball/ganymede/releases/download/v2.1.2.20230910/ganymede-2.1.2.20230910.jar -O /tmp/ganymede/ganymede.jar
+RUN /usr/bin/java -jar /tmp/ganymede/ganymede.jar --install
 
 # Java (IJava)
-RUN apt install -y openjdk-17-jdk
-RUN mkdir -p /tmp/ijava
-RUN wget https://github.com/SpencerPark/IJava/releases/download/v1.3.0/ijava-1.3.0.zip -O /tmp/ijava/ijava-1.3.0.zip
-RUN unzip /tmp/ijava/ijava-1.3.0.zip -d /tmp/ijava
-RUN cd /tmp/ijava && python3 install.py --user
+#RUN apt install -y openjdk-17-jdk
+#RUN mkdir -p /tmp/ijava
+#RUN wget https://github.com/SpencerPark/IJava/releases/download/v1.3.0/ijava-1.3.0.zip -O /tmp/ijava/ijava-1.3.0.zip
+#RUN unzip /tmp/ijava/ijava-1.3.0.zip -d /tmp/ijava
+#RUN cd /tmp/ijava && python3 install.py --user
 
 # Javascript, Typescript, WebAssembly (Deno)
 RUN apt install -y protobuf-compiler
@@ -73,6 +70,19 @@ RUN jupyter kernelspec install --user --name "ocaml-jupyter-$(opam var switch)" 
 # Kotlin Support
 RUN pip install kotlin-jupyter-kernel
 
+# Haskell Support
+# Not working
+#RUN apt install -y libncurses-dev libzmq3-dev libcairo2-dev libpango1.0-dev libmagic-dev libblas-dev liblapack-dev haskell-stack
+#RUN mkdir -p /tmp/
+#RUN cd /tmp/ && git clone https://github.com/gibiansky/IHaskell && cd IHaskell && pip install -r requirements.txt
+#RUN cd /tmp/IHaskell && stack install --fast
+#RUN cd /tmp/IHaskell && ihaskell install
+
+# Dockerfile support
+#RUN apt install -y nodejs npm
+#RUN python -m pip install dockerfile-kernel
+#RUN python -m dockerfile_kernel.install
+
 # Language Servers
 RUN apt install -y nodejs npm
 RUN pip install jupyterlab-lsp
@@ -85,6 +95,6 @@ RUN pip install jupyterlab-vim
 
 EXPOSE 8888
 
-ENTRYPOINT [ "/root/.pyenv/shims/jupyter-lab", "--allow-root", "--ip=0.0.0.0", "--port=8888"]
+ENTRYPOINT [ "/root/env/bin/jupyter-lab", "--allow-root", "--ip=0.0.0.0", "--port=8888"]
 
 
