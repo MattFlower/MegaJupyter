@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>MegaJupyter</Name>
-  <Repository>MattFlower/MegaJupyter</Repository>
+  <Repository>ghcr.io/mattflower/mega_jupyter</Repository>
   <Registry>https://ghcr.io/MattFlower/MegaJupyter</Registry>
   <Network>bridge</Network>
   <MyIP/>
@@ -9,39 +9,48 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/MattFlower/MegaJupyter/</Support>
   <Project>https://github.com/MattFlower/MegaJupyter</Project>
-  <Overview>MegaJupyter is a customized version of Jupyter that contains the languages that I know and care about, including Java, Python, Rust, Javascript, OCaml, and Go available as a docker container.  MegaJupyter is meant to be run as a container in Unraid, but works other places as well.</Overview>
+  <Overview>MegaJupyter is a customized version of Jupyter that contains the languages that I know and care about, including Java, Python, Rust, Javascript, OCaml, and Go available as a docker container.  MegaJupyter
+    is meant to be run as a container in Unraid, but works other places as well.</Overview>
   <Category>Productivity: Tools:</Category>
-  <WebUI>http://[IP]:[PORT:10080]/</WebUI>
+  <WebUI>http://[IP]:[PORT:8888]/</WebUI>
   <TemplateURL/>
   <Icon>https://en.wikipedia.org/wiki/File:Jupyter_logo.svg</Icon>
   <ExtraParams>--restart unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1602556511</DateInstalled>
+  <DateInstalled>1713627481</DateInstalled>
   <DonateText/>
   <DonateLink/>
   <Description>This image is mostly meant to run Jupyter for multiple languages to allow for quick experimentation.</Description>
-  <Networking>
-    <Mode>bridge</Mode>
-    <Publish>
-      <Port>
-        <HostPort>10080</HostPort>
-        <ContainerPort>8888</ContainerPort>
-        <Protocol>tcp</Protocol>
-      </Port>
-    </Publish>
-  </Networking>
+  <!--
+    <Networking>
+      <Mode>host</Mode>
+      <Publish>
+        <Port>
+          <HostPort>10080</HostPort>
+          <ContainerPort>8888</ContainerPort>
+          <Protocol>tcp</Protocol>
+        </Port>
+      </Publish>
+    </Networking>
+  -->
   <Data>
     <Volume>
-      <HostDir>/mnt/cache/appdata/mega_jupyter</HostDir>
+      <HostDir>/mnt/cache/appdata/mega_jupyter/notebooks</HostDir>
       <ContainerDir>/app</ContainerDir>
       <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/cache/appdata/mega_jupyter/config</HostDir>
+      <ContainerDir>/root/.jupyter</ContainerDir>
     </Volume>
   </Data>
   <Environment>
   </Environment>
   <Labels/>
-  <Config Name="Config" Target="/app" Default="/mnt/cache/appdata/mega_jupyter" Mode="rw" Description="Where to store jupyter notebooks created while using the app" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/mega_jupyter</Config>
-  <Config Name="Port" Target="10080" Default="10080" Mode="tcp" Description="Container Port: 10080" Type="Port" Display="always" Required="true" Mask="false">10080</Config>
+  <Config Name="Notebooks" Target="/app" Default="/mnt/cache/appdata/mega_jupyter/notebooks" Mode="rw" Description="Where to store jupyter notebooks created while using the app" Type="Path" Display="always" Required=
+          "true" Mask="false">/mnt/cache/appdata/mega_jupyter/notebooks</Config>
+  <Config Name="Jupyter Settings" Target="/root/.jupyter" Default="/mnt/cache/appdata/mega_jupyter/config" Mode="rw" Description="Where to store jupyter configuration info" Type="Path" Display="always" Required="true
+" Mask="false">/mnt/cache/appdata/mega_jupyter/config</Config>
+  <Config Name="UI Port" Target="8888" Default="10080" Mode="tcp" Description="Container Port: 8888" Type="Port" Display="always" Required="true" Mask="false"></Config>
 </Container>
-
