@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Container version="2">
+<Container version="2.1">
   <Name>MegaJupyter</Name>
   <Repository>ghcr.io/mattflower/mega_jupyter</Repository>
   <Registry>https://ghcr.io/MattFlower/MegaJupyter</Registry>
@@ -9,7 +9,7 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/MattFlower/MegaJupyter/</Support>
   <Project>https://github.com/MattFlower/MegaJupyter</Project>
-  <Overview>MegaJupyter is a customized version of Jupyter that contains the languages that I know and care about, including Java, Python, Rust, Javascript, OCaml, and Go available as a docker container.  MegaJupyter
+  <Overview>MegaJupyter is a customized version of Jupyter that contains the languages that I know and care about, including Java, Python, Rust, Javascript, OCaml, and Go available as a docker container.  It also contains some basic LLM packages like torch and fastai.  MegaJupyter
     is meant to be run as a container in Unraid, but works other places as well.</Overview>
   <Category>Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:8888]/</WebUI>
@@ -43,6 +43,10 @@
     <Volume>
       <HostDir>/mnt/cache/appdata/mega_jupyter/config</HostDir>
       <ContainerDir>/root/.jupyter</ContainerDir>
+    </Volume>
+    <Volume>
+      <HostDir>/var/run/docker.sock</HostDir>
+      <ContainerDir>/var/run/docker.sock</ContainerDir>
     </Volume>
   </Data>
   <Environment>

@@ -1,0 +1,2 @@
+# This sudoer entry only allows the jupyter user to change the permissions of /run/docker.sock to jupyter:jupyter
+jupyter ALL=(ALL) NOPASSWD: /bin/chown jupyter\:jupyter /run/docker.sock
