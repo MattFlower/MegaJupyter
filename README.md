@@ -33,7 +33,7 @@ This isn't counting the dozens of other security vulnerabilities that I haven't 
 - Groovy (Ganymede)
 - Java (Ganymede)
 - Kotlin
-- OCaml
+- OCaml (temporarily disabled until the kernel is updated to a newer version of OCaml)
 - Python
 - Rust
 - Dockerfiles
