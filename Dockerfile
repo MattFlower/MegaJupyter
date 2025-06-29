@@ -137,9 +137,9 @@ RUN chown -R jupyter /app && \
     rm -rf /tmp/*
 
 # Now switch to the jupyter user and install all of the kernels
-#USER jupyter
+USER jupyter
 
-#EXPOSE 8888
-#ENTRYPOINT ["/srv/entrypoint.sh"]
+EXPOSE 8888
+ENTRYPOINT ["/srv/entrypoint.sh"]
 
 
