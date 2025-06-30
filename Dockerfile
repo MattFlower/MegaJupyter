@@ -66,7 +66,7 @@ RUN pip install --no-cache-dir \
     jupyterlab \
     jupyterlab-lsp \
     jupyterlab-vim && \
-    pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128 && \
+    pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128 && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal && \
     /home/jupyter/.cargo/bin/cargo install evcxr_jupyter --no-default-features && \
     /home/jupyter/.cargo/bin/cargo install cargo-cache && \
