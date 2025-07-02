@@ -26,6 +26,7 @@ RUN apt update &&\
     libsqlite3-dev \
     libssl-dev \
     libzmq5-dev \
+    neovim \
     nodejs \
     npm \
     opam \
@@ -62,10 +63,15 @@ RUN pip install --no-cache-dir \
     fastai \
     kotlin-jupyter-kernel \
     jupyter \
+    jupyter-ai \
     jupyter-c-kernel \
+    jupyter-package-manager \
     jupyterlab \
+    jupyterlab-git \
     jupyterlab-lsp \
-    jupyterlab-vim && \
+    jupyterlab-vim \
+    langchain-ollama \
+    variable-inspector && \
     pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128 && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal && \
     /home/jupyter/.cargo/bin/cargo install evcxr_jupyter --no-default-features && \
@@ -138,6 +144,8 @@ RUN chown -R jupyter /app && \
 
 # Now switch to the jupyter user and install all of the kernels
 USER jupyter
+RUN echo >> /home/jupyter/.bashrc && \
+    echo 'export PATH=/app/node_modules/.bin:\$PATH' >> /home/jupyter/.bashrc
 
 EXPOSE 8888
 ENTRYPOINT ["/srv/entrypoint.sh"]

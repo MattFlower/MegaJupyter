@@ -15,7 +15,7 @@
   <WebUI>http://[IP]:[PORT:8888]/</WebUI>
   <TemplateURL/>
   <Icon>https://en.wikipedia.org/wiki/File:Jupyter_logo.svg</Icon>
-  <ExtraParams>--restart unless-stopped</ExtraParams>
+  <ExtraParams>--shm-size=512m --gpus=all</ExtraParams>
   <PostArgs/>
   <CPUset/>
   <DateInstalled>1713627481</DateInstalled>

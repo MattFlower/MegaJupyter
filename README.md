@@ -3,6 +3,11 @@ I like programming languages -- they are fun to learn and you become a better
 programmer as a result of that learning.  This docker image is built so you 
 can enjoy several different programming languages inside of Jupyter notebooks.
 
+I am also studying deep learning at the moment, so this image is built with 
+pytorch and fastai installed.  It is optimized for running on an NVIDIA GPU.
+My card is rather recent, so I am currently using the nightly builds to ensure
+support for sm120 and CUDA 12.8.
+
 The image is also built to be installed in Unraid.  Eventually, when it feels a 
 bit more complete, I'll publish it to the Unraid community apps store.
 
@@ -47,8 +52,7 @@ This isn't counting the dozens of other security vulnerabilities that I haven't 
 # Logging in
 The default password is 'password'.  You should really change this.
 
-# Changing the Password
-Open a console to the container and run:
+To change the password, open a console to the container and run:
 
 ```bash
 jupyter lab password
