@@ -150,6 +150,7 @@ RUN echo >> /home/jupyter/.bashrc && \
     echo 'export PATH=/sbin:/bin:/app/node_modules/.bin:/home/jupyter/env:/home/jupyter/.deno/bin:/home/jupyter/.cargo/bin:/home/jupyter/go/bin:\$PATH' >> /home/jupyter/.bashrc
 
 EXPOSE 8888
+EXPOSE 7860
 ENTRYPOINT ["/srv/entrypoint.sh"]
 
 
