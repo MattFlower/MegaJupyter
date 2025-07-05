@@ -60,7 +60,9 @@ RUN pip install --no-cache-dir \
     bash_kernel \
     dockerfile-kernel \
     'duckduckgo_search>=6.2' \
+    dvc \
     fastai \
+    gradio \
     kotlin-jupyter-kernel \
     jupyter \
     jupyter-ai \
@@ -145,7 +147,7 @@ RUN chown -R jupyter /app && \
 # Now switch to the jupyter user and install all of the kernels
 USER jupyter
 RUN echo >> /home/jupyter/.bashrc && \
-    echo 'export PATH=/app/node_modules/.bin:\$PATH' >> /home/jupyter/.bashrc
+    echo 'export PATH=/sbin:/bin:/app/node_modules/.bin:/home/jupyter/env:/home/jupyter/.deno/bin:/home/jupyter/.cargo/bin:/home/jupyter/go/bin:\$PATH' >> /home/jupyter/.bashrc
 
 EXPOSE 8888
 ENTRYPOINT ["/srv/entrypoint.sh"]
